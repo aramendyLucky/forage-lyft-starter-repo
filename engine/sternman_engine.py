@@ -1,15 +1,18 @@
-from abc import ABC
 
-from car import Car
+from engine import Engine
+from service_criteria import SternmanEngineServiceCriteria
 
-
-class SternmanEngine(Car, ABC):
+class SternmanEngine(Engine):
     def __init__(self, last_service_date, warning_light_is_on):
-        super().__init__(last_service_date)
+        self.last_service_date = last_service_date
         self.warning_light_is_on = warning_light_is_on
 
-    def engine_should_be_serviced(self):
-        if self.warning_light_is_on:
-            return True
-        else:
-            return False
+    def needs_service(self):
+        # Implementa la lógica específica para el Sternman Engine
+        return self.warning_light_is_on
+
+class SternmanEngineServiceCriteria(SternmanEngineServiceCriteria):
+    def needs_service(self, engine):
+        # Implementa la lógica específica para los criterios del Sternman Engine
+        return engine.needs_service()
+ 
